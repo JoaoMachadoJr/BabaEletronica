@@ -1,89 +1,98 @@
-**Aplicativo de bab· EletrÙnica**
+**Aplicativo de bab√° Eletr√¥nica**
 =============
-#####Nosso aplicativo ir· servir como uma bab· eletrÙnica.
-#####Usaremos o microfone do android para captar o choro da crianÁa e enviar notificaÁıes aos pais.
-#####Para que os aparelhos saibam os IPs uns dos outros È possÌvel que usemos um Web Service para login e logout, faremos isso se n„o encontrarmos uma soluÁ„o mais simples antes.
+#####Nosso aplicativo ir√° servir como uma bab√° eletr√¥nica.
+#####Usaremos o microfone do android para captar o choro da crian√ßa e enviar notifica√ß√µes aos pais.
+#####Para que os aparelhos saibam os IPs uns dos outros √© poss√≠vel que usemos um Web Service para login e logout, faremos isso se n√£o encontrarmos uma solu√ß√£o mais simples antes.
 
 ![Driagrama Simples](http://i.imgur.com/YXTYCKF.png)
 
 ###**Tela Inicial**
-A tela Inicial  È a primeira a ser aberta ao clicar no aplicativo.
-A principal funÁ„o dela È oferecer a escolha de usar no modo para crianÁas ou para os pais.
-Como È a primeira tela a ser exibida, tambÈm deve ser a mais bonita e bem feita.
-**J· feito:**
+A tela Inicial  √© a primeira a ser aberta ao clicar no aplicativo.
+A principal fun√ß√£o dela √© oferecer a escolha de usar no modo para crian√ßas ou para os pais.
+Como √© a primeira tela a ser exibida, tamb√©m deve ser a mais bonita e bem feita.
 
-* Um bot„o para o Modo CrianÁa, com o evento funcionando e abrindo uma activity para o modo crianÁa
+**J√° feito:**
+
+* Um bot√£o para o Modo Crian√ßa, com o evento funcionando e abrindo uma activity para o modo crian√ßa
 
 **Falta fazer:**
 
-* Falta fazer o design da tela. Ela est· feia e primitiva. 
+* Falta fazer o design da tela. Ela est√° feia e primitiva. 
 * Falta chamar uma activity para o modo dos pais
-* Levar direto para a activity correta, caso o usu·rio tenha aberto antes algum modo, iniciado o serviÁo, e fechado o aplicativo. Como o serviÁo continuar· rodando, deve-se levar direto para o activity do modo em execuÁ„o
+* Levar direto para a activity correta, caso o usu√°rio tenha aberto antes algum modo, iniciado o servi√ßo, e fechado o aplicativo. Como o servi√ßo continuar√° rodando, deve-se levar direto para o activity do modo em execu√ß√£o
 
-###**Tela CrianÁa**
-Aqui estar· a interface de uso do aplicativo para o celular que for ficar perto da crianÁa. O mais importante È ter capacidade de ligar e desligar o monitoramento. Assim como algumas configuraÁıes de rede, a serem definidas no futuro.
-**J· feito:**
+###**Tela Crian√ßa**
+Aqui estar√° a interface de uso do aplicativo para o celular que for ficar perto da crian√ßa. O mais importante √© ter capacidade de ligar e desligar o monitoramento. Assim como algumas configura√ß√µes de rede, a serem definidas no futuro.
 
-* Capacidade de exibir e esconder as configuraÁıes de rede, por um evento do switch. (Embora talvez tenha feito atoa, quem for fazer o design talvez queira colocar aquilo numa tela de OP«’ES)
-* Capacidade de disparar um serviÁo
-* Um mÈtodo para capturar o IP local do usu·rio. (O IP da internet n„o È simples de capturar, pois o WIFI/Roteador/Modem mascara ele)
+**J√° feito:**
+
+* Capacidade de exibir e esconder as configura√ß√µes de rede, por um evento do switch. (Embora talvez tenha feito atoa, quem for fazer o design talvez queira colocar aquilo numa tela de OP√á√ïES)
+* Capacidade de disparar um servi√ßo
+* Um m√©todo para capturar o IP local do usu√°rio. (O IP da internet n√£o √© simples de capturar, pois o WIFI/Roteador/Modem mascara ele)
 * Colocar listeners nos switches
 
 **Falta fazer:**
 
 * Fazer um design bonito e simples para a tela.
 * Caso formos usar um Web Service, oferecer campos para login.
-* Passar e receber configuraÁıes do ServiÁo CrianÁa.
+* Passar e receber configura√ß√µes do Servi√ßo Crian√ßa.
 
 ###**Tela pais**
-Aqui estar· a interface para o aparelho que for ficar com os pais. Deve ser capaz de escolher a sensibilidade desejada, o tipo de notificaÁ„o (audio, silenciosa, etc). E ter capacidade de dizer logar no web service como ouvinte.
-**J· feito:**
+Aqui estar√° a interface para o aparelho que for ficar com os pais. Deve ser capaz de escolher a sensibilidade desejada, o tipo de notifica√ß√£o (audio, silenciosa, etc). E ter capacidade de dizer logar no web service como ouvinte.
+
+**J√° feito:**
+
 **Falta Fazer:**
 
-* Capacidade de exibir e esconder as configuraÁıes de rede.
-* Capacidade de disparar um serviÁo
-* Um mÈtodo para capturar o IP local do usu·rio.
+* Capacidade de exibir e esconder as configura√ß√µes de rede.
+* Capacidade de disparar um servi√ßo
+* Um m√©todo para capturar o IP local do usu√°rio.
 * Fazer um design bonito e simples para a tela.
 * Caso formos usar um Web Service, oferecer campos para login.
-* Passar e receber configuraÁıes do ServiÁo Pais.
+* Passar e receber configura√ß√µes do Servi√ßo Pais.
 
-###**ServiÁo CrianÁa**
-Esse ser· o serviÁo a ser iniciado na Tela CrianÁa. Sua funÁ„o È gravar audios, medir volume, e enviar notificaÁıes para o ServiÁo Pais.
-**J· feito:**
+###**Servi√ßo Crian√ßa**
+Esse ser√° o servi√ßo a ser iniciado na Tela Crian√ßa. Sua fun√ß√£o √© gravar audios, medir volume, e enviar notifica√ß√µes para o Servi√ßo Pais.
 
-* A classe j· foi crianda
-* J· conseguimos medir o volume ambiente :)
+**J√° feito:**
+
+* A classe j√° foi crianda
+* J√° conseguimos medir o volume ambiente :)
 
 **Falta fazer:**
 
 * Falta realizar a tarefa de medir volume em uma thread separada.
-* (Talvez) Ter diferentes opÁıes de frequencia escuta, para economizar bateria
+* (Talvez) Ter diferentes op√ß√µes de frequencia escuta, para economizar bateria
 * Fazer um loop para estar sempre medindo o volume.
-* Ser capaz de enviar notificaÁıes para o ServiÁo Pais.
+* Ser capaz de enviar notifica√ß√µes para o Servi√ßo Pais.
 
-###**ServiÁo Pais**
-Esse ser· o serviÁo a ser iniciado na Tela Pais. Sua funÁ„o È receber notificaÁıes do serviÁo crianÁa.
-**J· feito:**
+###**Servi√ßo Pais**
+Esse ser√° o servi√ßo a ser iniciado na Tela Pais. Sua fun√ß√£o √© receber notifica√ß√µes do servi√ßo crian√ßa.
+
+**J√° feito:**
+
 **Falta fazer:**
 
 * Criar a classe
-* Criar uma Thread para ficar ouvindo eventos do ServiÁo CrianÁa
-* Ser capaz de enviar para o ServiÁo CrianÁa alguns dados de configuraÁıes (Sensibilidade, etc)
+* Criar uma Thread para ficar ouvindo eventos do Servi√ßo Crian√ßa
+* Ser capaz de enviar para o Servi√ßo Crian√ßa alguns dados de configura√ß√µes (Sensibilidade, etc)
 
 ###**Web Service ou semelhante**
-**J· feito:**
+
+**J√° feito:**
+
 **Falta fazer:**
 
-* Falta definir qual tecnologia usaremos para dizer aos telefones com quem eles ir„o se comunicar, IP e Porta.
-* Dependendo da tecnologia a comunicaÁ„o ser· cliente-servidor-cliente. Dependendo da tecnologia ser· peer-to-peer hibrido com cliente-servidor.
+* Falta definir qual tecnologia usaremos para dizer aos telefones com quem eles ir√£o se comunicar, IP e Porta.
+* Dependendo da tecnologia a comunica√ß√£o ser√° cliente-servidor-cliente. Dependendo da tecnologia ser√° peer-to-peer hibrido com cliente-servidor.
 
 ###**Diversos**
 
 * Falta melhorar esse Read-me.
-* Falta fazer um Ìcone para o aplicativo
+* Falta fazer um √≠cone para o aplicativo
 * Falta colocar o aplicativo no Google Play
 
-###**OrientaÁıes Gerais**
-* Qualquer tarefa pesada deve ser feita em uma Thread separada para n„o congelar a interface.
-* Qualquer tarefa que tenha risco real de causar exceÁ„o deve ser feita em uma Thread separada para n„o derrubar o APP e os serviÁos.
-* Se vocÍ gostou de algum dos itens acima e quiser fazer, fique avontade :)
+###**Orienta√ß√µes Gerais**
+* Qualquer tarefa pesada deve ser feita em uma Thread separada para n√£o congelar a interface.
+* Qualquer tarefa que tenha risco real de causar exce√ß√£o deve ser feita em uma Thread separada para n√£o derrubar o APP e os servi√ßos.
+* Se voc√™ gostou de algum dos itens acima e quiser fazer, fique avontade :)

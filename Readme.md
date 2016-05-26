@@ -58,12 +58,12 @@ Esse será o serviço a ser iniciado na Tela Criança. Sua função é gravar au
 
 * A classe já foi crianda
 * Já conseguimos medir o volume ambiente :)
+* Falta realizar a tarefa de medir volume em uma thread separada.
+* Fazer um loop para estar sempre medindo o volume.
 
 **Falta fazer:**
 
-* Falta realizar a tarefa de medir volume em uma thread separada.
 * (Talvez) Ter diferentes opções de frequencia escuta, para economizar bateria
-* Fazer um loop para estar sempre medindo o volume.
 * Ser capaz de enviar notificações para o Serviço Pais.
 
 ###**Serviço Pais**

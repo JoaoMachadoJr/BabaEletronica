@@ -1,30 +1,20 @@
 package com.example.joao.baba1;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.Looper;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 public class TelaCrianca extends AppCompatActivity {
@@ -60,7 +50,8 @@ public class TelaCrianca extends AppCompatActivity {
         ConfigCrianca.meu_ip=getIpAddress();
         tvw_crianca_iplocal.setText("Seu IP local é: "+ConfigCrianca.meu_ip);
 
-        //Adiciona evento de toggle dos switches
+
+        //Adiciona evento de toggle do switch para descoberta de rede Manual/Auto
         swt_crianca_descoberta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -77,32 +68,20 @@ public class TelaCrianca extends AppCompatActivity {
             }
         });
 
+        //Evento de toggle do Switch que liga/desliga o serviço criança
         swt_crianca_ligado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                //Intent mServiceIntent = new Intent(TelaCrianca.this, ServiceCrianca.class);
-                //startService(mServiceIntent);
-
-                if (isChecked){
+                if (isChecked){ //Se estiver ligando
                     try {
-                        sm= new SoundMeter();
-                       // sm.start();
-                        sm.onCreate();
-                        sm.onResume();
-                        Thread.sleep(1000);
-                        sm.onPause();
-                        Toast.makeText(TelaCrianca.this, "Volume: "+SoundMeter.maior, Toast.LENGTH_SHORT).show();
-                        SoundMeter.maior=-1;
+                        ServiceCrianca.tela=TelaCrianca.this;
+                        startService(new Intent(TelaCrianca.this,ServiceCrianca.class));
+
                     } catch (Exception e) {
-                        Log.e("MINHATAG",e.toString());
+                        Log.e("TAG-Joao","Exceção",e);
                     }
-                } else{
-                   // sm.stop();
-                   // Log.d("MINHATAG", "Terminou");
-                   // double valor = sm.getAmplitude();
-                    //Log.d("MINHATAG", "VALOR="+valor);
-                   // sm.stop();
+                } else{ //Se estiver desligando
+                    stopService(new Intent(TelaCrianca.this,ServiceCrianca.class));
                 }
             }
         });
@@ -131,7 +110,7 @@ public class TelaCrianca extends AppCompatActivity {
                 }
             }
         } catch (SocketException ex) {
-            Log.e("MEUERRO", ex.toString());
+            Log.e("TAG-Joao", ex.toString());
         }
         return null;
     }

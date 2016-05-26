@@ -9,8 +9,10 @@ import android.widget.Button;
 
 public class TelaInicial extends AppCompatActivity {
 
-    private Button btn_inicial_crianca;
-    private Button btn_inicial_pais;
+    private Button btn_inicial_crianca; //Botão para abrir a tela criança
+    private Button btn_inicial_pais;    //Botão para abrir a tela dos pais
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,7 @@ public class TelaInicial extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //A fazer: Mudar para tela do modo pais
-                Log.d("Evento", "Click em  btn_inicial_pais");
+                Log.d("TAG-Joao", "Click em  btn_inicial_pais");
             }
         });
 

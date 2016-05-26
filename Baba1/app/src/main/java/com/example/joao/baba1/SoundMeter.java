@@ -6,8 +6,10 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,9 +18,23 @@ import java.util.TimerTask;
  */
 public class SoundMeter{
 
-    private MediaRecorder mRecorder = null;
+    public static MediaRecorder mRecorder = null;
+    public static boolean rodando=false;
 
-    public void start() throws IOException {
+
+    private static final int sampleRate = 8000;
+    private AudioRecord audio;
+    private int bufferSize;
+    private double lastLevel = 0;
+    public static Thread t;
+    private static final int SAMPLE_DELAY = 75;
+    public static double maior=-1;
+    public static ArrayList<Double> lista = new ArrayList<Double>();
+
+
+
+
+    public static void start() throws IOException {
         if (mRecorder == null) {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -27,124 +43,57 @@ public class SoundMeter{
             mRecorder.setOutputFile("/dev/null");
             mRecorder.prepare();
             mRecorder.start();
-            Log.d("MINHATAG2","mRecorder.start() , NULL=="+(mRecorder==null));
         }
     }
 
-    public void stop() {
+    public static void stop(){
         if (mRecorder != null) {
+//            mRecorder.wait(1000);
             mRecorder.stop();
             mRecorder.release();
-           // mRecorder = null;
-           // Log.d("MINHATAG2","mRecorder.release() , NULL=="+(mRecorder==null));
+
         }
     }
-
-    public double getAmplitude() {
-        if (mRecorder != null){
-
-            Log.d("MINHATAG2","mRecorder.start() , NULL=="+(mRecorder==null));
-            return  mRecorder.getMaxAmplitude();}
+    public static double getAmplitude(){
+        if (mRecorder != null)
+            return  mRecorder.getMaxAmplitude();
         else
-            return -1;
+            return 0;
 
     }
-
-
-    public double ouvir(long tempo) throws IOException, InterruptedException {
-        synchronized (Thread.currentThread()){
-            Log.d("MINHATAG1","comecou a ouvir");
-            Timer t = new Timer();
-            this.start();
-            Thread.currentThread().wait(tempo);
-            this.stop();
-            Log.d("MINHATAG1", "Terminou de ouvir");
-            return this.getAmplitude();
-
-        }
-
-    }
-
-    private static final int sampleRate = 8000;
-    private AudioRecord audio;
-    private int bufferSize;
-    private double lastLevel = 0;
-    private Thread thread;
-    private static final int SAMPLE_DELAY = 75;
-    public static double maior=-1;
-
-    protected void onCreate() {
-
-        try {
-            bufferSize = AudioRecord
-                    .getMinBufferSize(sampleRate, AudioFormat.CHANNEL_IN_MONO,
-                            AudioFormat.ENCODING_PCM_16BIT);
-        } catch (Exception e) {
-            android.util.Log.e("TrackingFlow", "Exception", e);
-        }
-    }
-
-    protected void onResume() {
-        audio = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRate,
-                AudioFormat.CHANNEL_IN_MONO,
-                AudioFormat.ENCODING_PCM_16BIT, bufferSize);
-
-        audio.startRecording();
-        thread = new Thread(new Runnable() {
+    public static double ouvir(double tempo){
+        t= new Thread(new Runnable() {
+            @Override
             public void run() {
-                while(thread != null && !thread.isInterrupted()){
-                    //Let's make the thread sleep for a the approximate sampling time
-                    try{Thread.sleep(SAMPLE_DELAY);}catch(InterruptedException ie){ie.printStackTrace();}
-                    readAudioBuffer();//After this call we can get the last value assigned to the lastLevel variable
 
-                    Log.d("MINHATAG3","LASTLEVEL="+lastLevel);
-                    if (lastLevel>maior){
-                        maior=lastLevel;
-                    }
+                try {
+                    SoundMeter.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             }
         });
-        thread.start();
-    }
-
-    /**
-     * Functionality that gets the sound level out of the sample
-     */
-    private void readAudioBuffer() {
-
-        try {
-            short[] buffer = new short[bufferSize];
-
-            int bufferReadResult = 1;
-
-            if (audio != null) {
-
-                // Sense the voice...
-                bufferReadResult = audio.read(buffer, 0, bufferSize);
-                double sumLevel = 0;
-                for (int i = 0; i < bufferReadResult; i++) {
-                    sumLevel += buffer[i];
-                }
-                lastLevel = Math.abs((sumLevel / bufferReadResult));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!rodando){
+            t.start();
+            rodando=true;
         }
-    }
-
-
-    protected void onPause() {
-
-        thread.interrupt();
-        thread = null;
         try {
-            if (audio != null) {
-                audio.stop();
-                audio.release();
-                audio = null;
-            }
-        } catch (Exception e) {e.printStackTrace();}
+            Thread.sleep((long) tempo);
+        } catch (InterruptedException e) {
+            t.interrupt();
+            t=null;
+
+            //Log.e("TAG-Joao","Exceção",e);
+            rodando=false;
+            Thread.currentThread().interrupt();
+            return 0;
+        }
+        t.interrupt();
+        rodando=false;
+       // SoundMeter.stop();
+        return SoundMeter.getAmplitude();
+
     }
 
 

@@ -1,0 +1,16 @@
+diff a/Readme.md b/Readme.md	(rejected hunks)
+@@ -58,12 +58,12 @@
+ 
+ * A classe jÃ¡ foi crianda
+ * JÃ¡ conseguimos medir o volume ambiente :)
++* Falta realizar a tarefa de medir volume em uma thread separada.
++* Fazer um loop para estar sempre medindo o volume.
+ 
+ **Falta fazer:**
+ 
+-* Falta realizar a tarefa de medir volume em uma thread separada.
+ * (Talvez) Ter diferentes opÃ§Ãµes de frequencia escuta, para economizar bateria
+-* Fazer um loop para estar sempre medindo o volume.
+ * Ser capaz de enviar notificaÃ§Ãµes para o ServiÃ§o Pais.
+ 
+ ###**ServiÃ§o Pais**

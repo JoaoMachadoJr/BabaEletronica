@@ -54,7 +54,7 @@ public class ServiceCrianca extends Service {
                         tela.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(tela,"VOLUME= "+d,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(tela,"VOLUME= "+String.format("%.2f",d)+"%",Toast.LENGTH_SHORT).show();
                             }
                         });
 

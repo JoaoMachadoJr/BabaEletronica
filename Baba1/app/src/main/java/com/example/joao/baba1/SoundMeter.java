@@ -92,7 +92,7 @@ public class SoundMeter{
         t.interrupt();
         rodando=false;
        // SoundMeter.stop();
-        return SoundMeter.getAmplitude();
+        return ((SoundMeter.getAmplitude()*100)/32767);
 
     }
 

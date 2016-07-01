@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,13 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TelaCrianca"></activity>
+        <activity android:name=".TelaCrianca" />
 
         <service
             android:name=".ServiceCrianca"
             android:exported="false"
-            android:label="ServiceCrianca" >
-        </service>
+            android:label="ServiceCrianca" />
+
+        <service
+            android:name=".ServiceAdulto"
+            android:exported="false"
+            android:label="ServiceAdulto" />
+
+        <activity android:name=".TelaAdulto"></activity>
     </application>
 
 </manifest>

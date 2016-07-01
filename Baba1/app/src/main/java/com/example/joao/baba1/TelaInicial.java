@@ -34,8 +34,10 @@ public class TelaInicial extends AppCompatActivity {
         btn_inicial_pais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("TAG-Lucas", "Click em  btn_inicial_pais");
+                startActivity(new Intent(TelaInicial.this, TelaAdulto.class));
                 //A fazer: Mudar para tela do modo pais
-                Log.d("TAG-Joao", "Click em  btn_inicial_pais");
+
             }
         });
 

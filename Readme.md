@@ -43,11 +43,11 @@ Aqui estará a interface para o aparelho que for ficar com os pais. Deve ser cap
 **Já feito:**
 
 * Capacidade de disparar um serviço
-
+* Um método para capturar o IP local do usuário.
+* 
 **Falta Fazer:**
 
 * Capacidade de exibir e esconder as configurações de rede.
-* Um método para capturar o IP local do usuário.
 * Fazer um design bonito e simples para a tela.
 * Caso formos usar um Web Service, oferecer campos para login.
 * Passar e receber configurações do Serviço Pais.
@@ -61,22 +61,23 @@ Esse será o serviço a ser iniciado na Tela Criança. Sua função é gravar au
 * Já conseguimos medir o volume ambiente :)
 * Falta realizar a tarefa de medir volume em uma thread separada.
 * Fazer um loop para estar sempre medindo o volume.
+* Ser capaz de enviar notificações para o Serviço Pais.
 
 **Falta fazer:**
 
 * (Talvez) Ter diferentes opções de frequencia escuta, para economizar bateria
-* Ser capaz de enviar notificações para o Serviço Pais.
 
 ###**Serviço Pais**
 Esse será o serviço a ser iniciado na Tela Pais. Sua função é receber notificações do serviço criança.
 
 **Já feito:**
-
-**Falta fazer:**
-
 * Criar a classe
 * Criar uma Thread para ficar ouvindo eventos do Serviço Criança
 * Ser capaz de enviar para o Serviço Criança alguns dados de configurações (Sensibilidade, etc)
+**Falta fazer:**
+
+*Trabalhar como que a notificação é exibida. (Um alarme? Uma notifiaão android?, etc)
+
 
 ###**Web Service ou semelhante**
 

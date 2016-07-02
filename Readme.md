@@ -1,4 +1,4 @@
-**Aplicativo de babá Eletrônica**
+﻿**Aplicativo de babá Eletrônica**
 =============
 #####Nosso aplicativo irá servir como uma babá eletrônica.
 #####Usaremos o microfone do android para captar o choro da criança e enviar notificações aos pais.
@@ -42,10 +42,11 @@ Aqui estará a interface para o aparelho que for ficar com os pais. Deve ser cap
 
 **Já feito:**
 
+* Capacidade de disparar um serviço
+
 **Falta Fazer:**
 
 * Capacidade de exibir e esconder as configurações de rede.
-* Capacidade de disparar um serviço
 * Um método para capturar o IP local do usuário.
 * Fazer um design bonito e simples para a tela.
 * Caso formos usar um Web Service, oferecer campos para login.

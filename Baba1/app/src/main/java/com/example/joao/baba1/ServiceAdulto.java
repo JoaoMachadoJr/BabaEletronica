@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,15 +17,20 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+=======
+>>>>>>> 5067b6802055464cc6fe5e9a43c5fd3d59ced08e
 public class ServiceAdulto extends Service{
 
     //static String nome;
     static TelaAdulto tela;
     static double d;
     static Thread t;
+<<<<<<< HEAD
     static String ipCrianca="172.168.1.103";
     public Socket socket=null;
     public ServerSocket socketNotificacoes=null;
+=======
+>>>>>>> 5067b6802055464cc6fe5e9a43c5fd3d59ced08e
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -53,6 +59,7 @@ public class ServiceAdulto extends Service{
         Runnable r = new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
                 avisaQueEstaOuvindo();
                 while (t!=null && !t.isInterrupted()){
                     try {
@@ -68,6 +75,19 @@ public class ServiceAdulto extends Service{
                         });
                         socketTemporario.close();
                         Thread.sleep(4000);
+=======
+                while (t!=null && !t.isInterrupted()){
+                    try {
+                        Log.d("TAG-Lucas","Serviço Iniciado");
+                        tela.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(tela,"Serviço Iniciado",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Thread.sleep(1000);
+
+>>>>>>> 5067b6802055464cc6fe5e9a43c5fd3d59ced08e
 
                     } catch (Exception e){
                         Log.e("TAG-Lucas","ServiceAdulto",e);
@@ -91,6 +111,7 @@ public class ServiceAdulto extends Service{
 
     }
 
+<<<<<<< HEAD
     public void avisaQueEstaOuvindo(){
 
 
@@ -112,4 +133,6 @@ public class ServiceAdulto extends Service{
         }
     }
 
+=======
+>>>>>>> 5067b6802055464cc6fe5e9a43c5fd3d59ced08e
 }

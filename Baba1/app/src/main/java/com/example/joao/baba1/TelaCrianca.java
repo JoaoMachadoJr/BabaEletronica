@@ -40,9 +40,9 @@ public class TelaCrianca extends AppCompatActivity {
         //Captura os Views pelo ID
         swt_crianca_ligado = (Switch) this.findViewById(R.id.swt_crianca_ligado);
         swt_crianca_descoberta = (Switch) this.findViewById(R.id.swt_crianca_descoberta);
-        tvw_crianca_ip = (TextView) this.findViewById(R.id.tvw_crianca_ip);
-        tvw_crianca_porta = (TextView) this.findViewById(R.id.tvw_crianca_porta);
-        layout_crianca_manual = (RelativeLayout) this.findViewById(R.id.layout_crianca_manual);
+        tvw_crianca_ip = (TextView) this.findViewById(R.id.tvw_adulto_ip);
+        tvw_crianca_porta = (TextView) this.findViewById(R.id.tvw_adulto_nome);
+        layout_crianca_manual = (RelativeLayout) this.findViewById(R.id.layout_adulto_manual);
         btn_crianca_salvar = (Button) this.findViewById(R.id.btn_crianca_salvar);
         tvw_crianca_iplocal = (TextView) this.findViewById(R.id.tvw_crianca_iplocal);
 

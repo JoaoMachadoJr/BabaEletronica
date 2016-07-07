@@ -3,75 +3,69 @@ package com.example.joao.baba1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
-
 public class TelaAdulto extends AppCompatActivity {
 
     private Switch swt_adulto_ligado;
     private Switch swt_adulto_descoberta;
     private TextView tvw_adulto_ip;
-    private TextView tvw_adulto_porta;
+    private TextView tvw_adulto_nome;
     private RelativeLayout layout_adulto_manual;
     private Button btn_adulto_salvar;
-    private TextView tvw_adulto_iplocal;
+    private TextView tvw_adulto_busca;
+    private Animation animation;//Animação para descoberta de rede
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_adulto);
 
+        //Configurações para utilizar a animação das letras piscando
+        animation = new AlphaAnimation(1, 0); // Altera alpha de visível a invisível
+        animation.setDuration(1800); // duração em milisegundos
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE); // Repetir infinitamente
+        animation.setRepeatMode(Animation.REVERSE); //Inverte a animação no final para que o botão vá desaparecendo
+
         //Captura os Views pelo ID
         swt_adulto_ligado = (Switch) this.findViewById(R.id.swt_adulto_ligado);
         swt_adulto_descoberta = (Switch) this.findViewById(R.id.swt_adulto_descoberta);
         tvw_adulto_ip = (TextView) this.findViewById(R.id.tvw_adulto_ip);
-        tvw_adulto_porta = (TextView) this.findViewById(R.id.tvw_adulto_nome);
         layout_adulto_manual = (RelativeLayout) this.findViewById(R.id.layout_adulto_manual);
         btn_adulto_salvar = (Button) this.findViewById(R.id.btn_adulto_salvar);
-
-        tvw_adulto_ip.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        tvw_adulto_busca = (TextView) this.findViewById(R.id.tvw_adulto_busca);
+        tvw_adulto_nome = (TextView) this.findViewById(R.id.tvw_adulto_nome);
 
         //Adiciona evento de toggle do switch para descoberta de rede Manual/Auto
         swt_adulto_descoberta.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked==false){//Descoberta manual
+                if (!isChecked){//Descoberta manual
                     //Exibe campos para IP e porta
-                    layout_adulto_manual.setVisibility(View.VISIBLE);
-                    tvw_adulto_iplocal.setText("Seu IP local é: "+ServiceAdulto.ipCrianca);
+                    //layout_adulto_manual.setVisibility(View.VISIBLE);
+                    tvw_adulto_ip.setEnabled(true);
+                    tvw_adulto_nome.setEnabled(true);
+                    btn_adulto_salvar.setEnabled(true);
+                    tvw_adulto_busca.setVisibility(View.INVISIBLE);
+                    tvw_adulto_busca.clearAnimation();
 
                 } else{//Descoberta automática
                     //Esconde campos para IP e Porta
-                    layout_adulto_manual.setVisibility(View.INVISIBLE);
-
+                    tvw_adulto_ip.setEnabled(false);
+                    tvw_adulto_nome.setEnabled(false);
+                    btn_adulto_salvar.setEnabled(false);
+                    tvw_adulto_busca.setVisibility(View.VISIBLE);
+                    tvw_adulto_busca.startAnimation(animation);
                 }
             }
         });
@@ -80,8 +74,10 @@ public class TelaAdulto extends AppCompatActivity {
         btn_adulto_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ServiceAdulto.ipCrianca=formatoIp(tvw_adulto_ip.getText().toString());
-                tvw_adulto_ip.setText(formatoIp(tvw_adulto_ip.getText().toString()));
+                //ServiceAdulto.ipCrianca=formatoIp(tvw_adulto_ip.getText().toString());
+                //tvw_adulto_ip.setText(formatoIp(tvw_adulto_ip.getText().toString()));
+                ServiceAdulto.ipCrianca=tvw_adulto_ip.getText().toString();
+                tvw_adulto_ip.setText(tvw_adulto_ip.getText().toString());
             }
         });
 
@@ -103,22 +99,10 @@ public class TelaAdulto extends AppCompatActivity {
                 }
             }
         });
-        
-        /*
-        //Evento de click do botão
-        btnServicoAdulto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("TAG-Lucas","Click no botao iniciar");
-                ServiceAdulto.tela=TelaAdulto.this;
-                startService(new Intent(TelaAdulto.this,ServiceAdulto.class));
-                //System.exit(0);
-            }
-        });*/
-
 
     }
 
+    /*
     public static String formatoIp(String entrada){
         String saida="";
         int i=0;
@@ -131,4 +115,5 @@ public class TelaAdulto extends AppCompatActivity {
         }
         return saida;
     };
+    */
 }

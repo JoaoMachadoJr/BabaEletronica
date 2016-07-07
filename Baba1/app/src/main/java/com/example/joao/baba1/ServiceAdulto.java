@@ -78,7 +78,7 @@ public class ServiceAdulto extends Service {
 
                     } catch (Exception e) {
                         Log.e("TAG-Lucas", "ServiceAdulto", e);
-                        System.exit(1);
+                        //System.exit(1);
 
                     }
                 }

@@ -5,31 +5,28 @@ import java.io.Serializable;
 /**
  * Created by Joao on 02/07/2016.
  */
-public class Ouvinte implements Serializable{
+public class Dispositivo implements Serializable{
 
     public String nome="";
     public String ip="";
-    public int port=0;
     public int sensibilidade=100;
 
-    public Ouvinte() {
+    public Dispositivo() {
     }
 
     @Override
     public String toString() {
-        return "Ouvinte{" +
+        return "Dispositivo{" +
                 "nome='" + nome + '\'' +
                 ", ip='" + ip + '\'' +
-                ", port='" + port + '\'' +
                 ", sensibilidade=" + sensibilidade +
                 '}';
     }
-    public Ouvinte clone(){
-        Ouvinte r = new Ouvinte();
+    public Dispositivo clone(){
+        Dispositivo r = new Dispositivo();
         r.nome=this.nome+"";
         r.ip=this.ip+"";
         r.sensibilidade=this.sensibilidade+0;
-        r.port=this.port+0;
         return r;
     }
 }

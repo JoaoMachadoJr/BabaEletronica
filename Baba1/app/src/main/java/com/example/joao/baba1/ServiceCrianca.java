@@ -1,18 +1,12 @@
 package com.example.joao.baba1;
 
-import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,8 +20,8 @@ public class ServiceCrianca extends Service {
     static TelaCrianca tela;
     static double d;
     static Thread threadServico;
-    static Thread threadNovosOuvintes;
-    static ArrayList<Ouvinte> ouvintes = new ArrayList<>();
+    static Thread threadNovosdispositivos;
+    static ArrayList<Dispositivo> dispositivos = new ArrayList<>();
     ServerSocket welcomeSocket = null;
     @Override
     public IBinder onBind(Intent intent) {
@@ -60,19 +54,19 @@ public class ServiceCrianca extends Service {
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                escutaNovosOuvintes();
+                escutaNovosdispositivos();
                 while (threadServico!=null && !threadServico.isInterrupted()){
                     try {
                         d =SoundMeter.ouvir(2000);
                         Log.d("TAG-Joao","VOLUME="+d);
 
-                        for (int i=0; i<ouvintes.size(); i++){  //para cada um dos ouvintes
-                            if (ouvintes.get(i).sensibilidade<=d){
-                                final Ouvinte o=ouvintes.get(i).clone();
+                        for (int i = 0; i< dispositivos.size(); i++){  //para cada um dos dispositivos
+                            if (dispositivos.get(i).sensibilidade<=d){
+                                final Dispositivo o= dispositivos.get(i).clone();
                                 Runnable r = new Runnable() {
                                     @Override
                                     public void run() {
-                                        notificaOuvinte(d,o);
+                                        notificadispositivo(d,o);
                                     }
                                 };
                                 new Thread(r).start();
@@ -110,47 +104,61 @@ public class ServiceCrianca extends Service {
     }
 
     //Metodo que cria uma Thread que espera pas chegarem
-    public void escutaNovosOuvintes(){
-        paraEscutaNovosOuvintes();  //Se ja estava escutando antes, pare de escutar
+    public void escutaNovosdispositivos(){
+        paraEscutaNovosdispositivos();  //Se ja estava escutando antes, pare de escutar
         Runnable r = new Runnable() {
             @Override
             public void run() {
                 try {
-                    Log.d("TAG-Joao-ServicoCrianca","Vou comecar a procurar novos ouvintes");
+                    Log.d("TAG-Joao-ServicoCrianca","Vou comecar a procurar novos dispositivos");
                     ObjectInputStream inStream=null;
 
                     while (true) {
                         welcomeSocket = new ServerSocket(6789);
                         Socket connectionSocket = welcomeSocket.accept();
-                        inStream = new ObjectInputStream(connectionSocket.getInputStream());
-                        Ouvinte pai = (Ouvinte) inStream.readObject();
-                        synchronized (ouvintes){
-                            ouvintes.add(pai);
+                        Mensagem msg = Mensagem.ler(connectionSocket);
+                        //requisição de dispositivo
+                        if (msg.tipo.equals("requisição de dispositivo")){
+                            Dispositivo pai=(Dispositivo)msg.parametros.get("dispositivo");
+                            synchronized (dispositivos){
+                                dispositivos.add(pai);
+                            }
+                            Log.d("TAG-joao-ServiceCrianca", "Adicionou a lista de dispositivos: "+pai.toString());
                         }
-                        Log.d("TAG-joao-ServiceCrianca", "Adicionou a lista de ouvintes: "+pai.toString());
+                        //ping
+                        else if (msg.tipo.equals("ping")){
+                            Mensagem nova = new Mensagem();
+                            nova.tipo = "pong";
+                            Mensagem.escrever(nova, connectionSocket);
+                        } else if (msg.tipo.equals("busca")){
+                            Mensagem nova = new Mensagem("busca");
+                            nova.parametros.put("nome", Build.MODEL);
+                            Mensagem.escrever(nova, connectionSocket);
+                        }
+
                         connectionSocket.close();
                         welcomeSocket.close();
                     }
                 } catch (Exception e){
                     Log.d("TAG-Joao", e.toString());
-                    paraEscutaNovosOuvintes();
+                    paraEscutaNovosdispositivos();
                 }
             }
         };
-        threadNovosOuvintes=new Thread(r);
-        threadNovosOuvintes.start();
+        threadNovosdispositivos=new Thread(r);
+        threadNovosdispositivos.start();
 
     }
 
-    //Metodo que mata a thread queescuta novos ouvintes
-    public void paraEscutaNovosOuvintes(){
-        if (threadNovosOuvintes==null){
+    //Metodo que mata a thread queescuta novos dispositivos
+    public void paraEscutaNovosdispositivos(){
+        if (threadNovosdispositivos==null){
             return;
         }
-        threadNovosOuvintes.interrupt();
-        threadNovosOuvintes=null;
-        synchronized (ouvintes){
-            ouvintes=new ArrayList<>();
+        threadNovosdispositivos.interrupt();
+        threadNovosdispositivos=null;
+        synchronized (dispositivos){
+            dispositivos =new ArrayList<>();
             try {
                 if (welcomeSocket!=null && !welcomeSocket.isClosed())
                     welcomeSocket.close();
@@ -161,15 +169,18 @@ public class ServiceCrianca extends Service {
         }
     }
 
-    public void notificaOuvinte(double d, Ouvinte ouvinte){
+    public void notificadispositivo(double d, Dispositivo dispositivo){
         try {
-            Socket clientSocket = new Socket(ouvinte.ip, ouvinte.port);
-            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            outToServer.writeBytes(""+d);
+            Socket clientSocket = new Socket(dispositivo.ip, 5678);
+            Mensagem msg = new Mensagem();
+            msg.tipo="notificação de choro";
+            msg.parametros.put("volume",(int)d);
+            Mensagem.escrever(msg,clientSocket);
             clientSocket.close();
-            Log.d("TAG-joao-ServicoCrianca","Notifiquei o pai "+ouvinte.toString());
+            Log.d("TAG-joao-ServicoCrianca","Notifiquei o pai "+ dispositivo.toString());
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("TAG-joao-Erro:","IP= "+ dispositivo.ip);
         }
 
     }

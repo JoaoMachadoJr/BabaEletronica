@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class TelaAdulto extends AppCompatActivity {
 
     private Switch swt_adulto_ligado;
@@ -66,6 +68,14 @@ public class TelaAdulto extends AppCompatActivity {
                     btn_adulto_salvar.setEnabled(false);
                     tvw_adulto_busca.setVisibility(View.VISIBLE);
                     tvw_adulto_busca.startAnimation(animation);
+
+                    //Aqui exibe a lista de dispositivos encontrados
+                    Log.d("tag-Joao-TelaAdulto","Vou imprimir o resultado da busca automatica");
+                    ArrayList<Dispositivo> lista = ServiceAdulto.buscaAutomatica();
+
+                    for (int i=0; i<lista.size(); i++){
+                        Log.d("TAG-joao","Busca-> "+lista.get(i).nome+" - "+lista.get(i).ip);
+                    }
                 }
             }
         });

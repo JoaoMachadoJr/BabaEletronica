@@ -27,13 +27,13 @@
             android:name=".ServiceCrianca"
             android:exported="false"
             android:label="ServiceCrianca" />
-
         <service
             android:name=".ServiceAdulto"
             android:exported="false"
             android:label="ServiceAdulto" />
 
-        <activity android:name=".TelaAdulto"></activity>
+        <activity android:name=".TelaAdulto" />
+        <activity android:name=".PopUp" android:theme="@style/AppTheme.CustomTheme"></activity>
     </application>
 
 </manifest>

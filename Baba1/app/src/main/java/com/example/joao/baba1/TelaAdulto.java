@@ -73,9 +73,15 @@ public class TelaAdulto extends AppCompatActivity {
                     Log.d("tag-Joao-TelaAdulto","Vou imprimir o resultado da busca automatica");
                     ArrayList<Dispositivo> lista = ServiceAdulto.buscaAutomatica();
 
-                    for (int i=0; i<lista.size(); i++){
-                        Log.d("TAG-joao","Busca-> "+lista.get(i).nome+" - "+lista.get(i).ip);
+                    if(lista.size() > 0){
+                        for (int i=0; i<lista.size(); i++){
+                            Log.d("TAG-joao","Busca-> "+lista.get(i).nome+" - "+lista.get(i).ip);
+                        }
                     }
+                    else{
+                        startActivity(new Intent(TelaAdulto.this, PopUp.class));
+                    }
+
                 }
             }
         });

@@ -4,35 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="com.example.joao.baba1.TelaInicial"
+    android:background="@drawable/telainicial"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.joao.baba1.TelaInicial">
+    android:clickable="true"
+    android:longClickable="false"
+    >
 
-    <TextView
-        android:text="Selecione o modo que deseja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Modo Criança"
         android:id="@+id/btn_Inicial_Crianca"
+        android:textSize="0sp"
+        android:background="@drawable/botaocrianca"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="18dp" />
+        android:layout_marginRight="205dp"
+        android:layout_marginEnd="205dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="550dp"
+        android:layout_alignRight="@+id/btn_inicial_pais"
+        android:layout_alignEnd="@+id/btn_inicial_pais" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Modo pais"
         android:id="@+id/btn_inicial_pais"
+        android:background="@drawable/botaopais"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="18dp" />
+        android:layout_marginLeft="198dp"
+        android:layout_marginStart="198dp"
+        android:layout_alignTop="@+id/btn_Inicial_Crianca"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".TelaCrianca">
+    tools:context=".TelaCrianca"
+    android:background="@drawable/tela2">
 
     <Switch
         android:textOn="Ligado"
@@ -16,9 +17,12 @@
         android:layout_height="wrap_content"
         android:text="Ligar"
         android:id="@+id/swt_crianca_ligado"
+        android:textSize="18dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="18dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="116dp"
+        android:layout_marginStart="116dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,83 +36,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="IP:"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textSize="18dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
-            android:width="60dp" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/tvw_adulto_ip"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView"
-            android:layout_toEndOf="@+id/textView"
-            android:width="200dp"
-            android:maxLength="16" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Porta:"
-            android:id="@+id/textView2"
-            android:textSize="18dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
-            android:width="60dp"
-            android:layout_below="@+id/tvw_adulto_ip"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/tvw_adulto_nome"
-            android:layout_below="@+id/tvw_adulto_ip"
-            android:layout_toRightOf="@+id/textView2"
-            android:width="100dp"
-            android:maxLength="5" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Seu endereço é xxxx.xxxx.xxxx : xx"
             android:id="@+id/tvw_crianca_iplocal"
             android:textSize="18dp"
             android:textColor="@color/abc_input_method_navigation_guard"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginBottom="110dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="131dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:id="@+id/btn_crianca_salvar"
-            android:layout_below="@+id/tvw_adulto_nome"
-            android:layout_alignRight="@+id/tvw_adulto_nome"
-            android:layout_alignEnd="@+id/tvw_adulto_nome" />
     </RelativeLayout>
 
-    <Switch
-        android:textOn="Auto"
-        android:textOff="Manual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descoberta de rede"
-        android:id="@+id/swt_crianca_descoberta"
-        android:textSize="18dp"
-        android:layout_above="@+id/layout_adulto_manual"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
 </RelativeLayout>

@@ -40,11 +40,12 @@
             android:id="@+id/tvw_crianca_iplocal"
             android:textSize="18dp"
             android:textColor="@color/abc_input_method_navigation_guard"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="110dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="131dp" />
+            android:layout_marginBottom="235dp" />
 
     </RelativeLayout>
 

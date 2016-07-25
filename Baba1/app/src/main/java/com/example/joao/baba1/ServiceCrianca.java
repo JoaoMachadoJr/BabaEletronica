@@ -22,6 +22,7 @@ public class ServiceCrianca extends Service {
     static Thread threadServico;
     static Thread threadNovosdispositivos;
     static ArrayList<Dispositivo> dispositivos = new ArrayList<>();
+    static ArrayList<Thread> t_dispositivos = new ArrayList<>();
     ServerSocket welcomeSocket = null;
     @Override
     public IBinder onBind(Intent intent) {
@@ -69,7 +70,9 @@ public class ServiceCrianca extends Service {
                                         notificadispositivo(d,o);
                                     }
                                 };
-                                new Thread(r).start();
+                                Thread t=new Thread(r);
+                                t.start();
+                                t_dispositivos.add(t);
 
                             }
                         }
@@ -88,6 +91,7 @@ public class ServiceCrianca extends Service {
 
     @Override
     public void onDestroy(){    //Metodo chamado ao parar o Serviço, ele libera os recursos e mata a thread
+        paraEscutaNovosdispositivos();
         try {
             SoundMeter.t.interrupt();
             SoundMeter.stop();
@@ -99,6 +103,10 @@ public class ServiceCrianca extends Service {
         threadServico.interrupt();
         //Log.e("TAG-Joao","Passou aqui: "+t.isAlive()+"   "+SoundMeter.t.isInterrupted());
         threadServico=null;
+        for (int i=0; i<t_dispositivos.size();i++){
+            t_dispositivos.get(i).interrupt();
+        }
+        t_dispositivos=new ArrayList<>();
         super.onDestroy();
 
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import java.net.Inet4Address;
@@ -44,7 +45,6 @@ public class TelaCrianca extends AppCompatActivity {
         //Exibe o IP local no textview adequado
         ConfigCrianca.meu_ip=getIpAddress();
         tvw_crianca_iplocal.setText("Seu IP local é: "+ConfigCrianca.meu_ip);
-
 
 
 

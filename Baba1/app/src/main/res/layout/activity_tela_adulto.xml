@@ -17,143 +17,11 @@
         android:layout_height="wrap_content"
         android:text="Ligar"
         android:id="@+id/swt_adulto_ligado"
-        android:layout_alignParentTop="true"
         android:textSize="20dp"
         android:checked="false"
-        android:layout_marginLeft="112dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_alignRight="@+id/layout_adulto_manual"
-        android:layout_alignEnd="@+id/layout_adulto_manual"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/layout_adulto_manual">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="IP:"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textSize="18dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
-            android:width="60dp"
-            android:visibility="invisible" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/tvw_adulto_ip"
-            android:layout_alignParentTop="true"
-            android:width="200dp"
-            android:maxLength="20"
-            android:inputType="text"
-            android:background="#ffffff"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="40dp"
-            android:layout_marginEnd="40dp"
-            android:textAlignment="center"
-            android:theme="@style/AppTheme"
-            android:contentDescription="IP"
-            android:hint="Digite um IP"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="34dp"
-            android:layout_marginStart="34dp"
-            android:layout_above="@+id/tvw_adulto_nome"
-            android:layout_marginBottom="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Nome:"
-            android:id="@+id/textView2"
-            android:textSize="18dp"
-            android:textColor="@color/abc_input_method_navigation_guard"
-            android:width="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/textView"
-            android:layout_toLeftOf="@+id/tvw_adulto_ip"
-            android:layout_toStartOf="@+id/tvw_adulto_ip"
-            android:visibility="invisible"
-            android:layout_marginBottom="25dp"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/tvw_adulto_nome"
-            android:width="100dp"
-            android:maxLength="5"
-            android:background="#ffffff"
-            android:layout_alignTop="@+id/textView2"
-            android:layout_alignLeft="@+id/tvw_adulto_ip"
-            android:layout_alignStart="@+id/tvw_adulto_ip"
-            android:layout_alignRight="@+id/tvw_adulto_ip"
-            android:layout_alignEnd="@+id/tvw_adulto_ip"
-            android:textAlignment="center"
-            android:hint="Digite um Nome" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscando Dispositos. Aguarde..."
-            android:id="@+id/tvw_adulto_busca"
-            android:visibility="invisible"
-            android:textSize="25dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/btn_adulto_salvar"
-            android:layout_marginTop="127dp" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tvw_adulto_nome"
-            android:layout_toRightOf="@+id/textView2"
-            android:layout_alignRight="@+id/tvw_adulto_busca"
-            android:layout_alignEnd="@+id/tvw_adulto_busca">
-
-            <Button
-                android:layout_width="132dp"
-                android:layout_height="61dp"
-                android:id="@+id/btn_adulto_salvar"
-                android:background="@layout/save_pressed"
-                android:layout_marginTop="57dp"
-                android:layout_gravity="center"
-                android:layout_below="@+id/swt_adulto_ligado"
-                android:layout_alignLeft="@+id/swt_adulto_ligado"
-                android:layout_alignStart="@+id/swt_adulto_ligado" />
-
-            <SeekBar
-                android:layout_width="292dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/seekBar"
-                android:layout_above="@+id/swt_adulto_descoberta"
-                android:layout_alignLeft="@+id/swt_adulto_descoberta"
-                android:layout_alignStart="@+id/swt_adulto_descoberta"
-                android:layout_marginBottom="70dp"
-                android:layout_alignRight="@+id/swt_adulto_descoberta"
-                android:layout_alignEnd="@+id/swt_adulto_descoberta"
-                android:layout_gravity="center"/>
-
-        </FrameLayout>
-    </RelativeLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp" />
 
     <Switch
         android:textOn="Auto"
@@ -164,13 +32,66 @@
         android:id="@+id/swt_adulto_descoberta"
         android:textSize="20dp"
         android:checked="false"
-        android:layout_above="@+id/layout_adulto_manual"
-        android:layout_marginBottom="37dp"
-        android:layout_alignRight="@+id/swt_adulto_ligado"
-        android:layout_alignEnd="@+id/swt_adulto_ligado"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/swt_adulto_ligado"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentRight="false"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/tvw_adulto_ip"
+        android:width="200dp"
+        android:maxLength="20"
+        android:inputType="text"
+        android:background="#ffffff"
+        android:textAlignment="center"
+        android:theme="@style/AppTheme"
+        android:contentDescription="IP"
+        android:hint="Digite um IP"
+        android:layout_below="@+id/swt_adulto_descoberta"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="132dp"
+        android:layout_height="61dp"
+        android:id="@+id/btn_adulto_salvar"
+        android:background="@layout/save_pressed"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/seekBar"
+        android:layout_marginTop="50dp" />
+
+    <SeekBar
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_gravity="center"
+        android:max="100"
+        android:progress="90"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:layout_alignTop="@+id/tv_sensibilidade"
+        android:layout_marginTop="30dp"
+        android:indeterminate="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sensibilidade: 90%"
+        android:id="@+id/tv_sensibilidade"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/tvw_adulto_ip"
+        android:layout_marginTop="90dp"
+        android:textSize="25dp"
+        android:visibility="visible" />
 
 </RelativeLayout>

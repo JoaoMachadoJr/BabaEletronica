@@ -25,9 +25,8 @@
         android:layout_alignEnd="@+id/btn_Inicial_Crianca">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="77dp"
-            android:text="Modo Criança"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:id="@+id/btn_Inicial_Crianca"
             android:background="@layout/botaocrianca_pressed"
             android:textSize="0sp"
@@ -44,8 +43,8 @@
 
         <Button
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="77dp"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:id="@+id/btn_inicial_pais"
             android:background="@layout/botaopais_pressed"
             android:layout_alignParentBottom="true"

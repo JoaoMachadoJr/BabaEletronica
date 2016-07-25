@@ -20,7 +20,7 @@ public class ServiceAdulto extends Service {
 
     public static String ipCrianca = "10.0.0.103";
     public static String meuNome="";
-    public static int sensibilidade=100;
+    public static int sensibilidade=90;
     public ServerSocket socketEscuta;
     public static String meuIP=null;
     public static ArrayList<Dispositivo> descoberta_ips_descobertos= new ArrayList<>();
@@ -134,75 +134,84 @@ public class ServiceAdulto extends Service {
                 Toast.makeText(tela, "Evento de Choro: volume " + d + "%", Toast.LENGTH_SHORT).show();
             }
         });
+        tela.triggerNotification("Little Angel","Volume com itensidade de "+d+"% no quarto da criança",true);
     }
 
     public static ArrayList<Dispositivo> buscaAutomatica(){
-        meuIP = TelaCrianca.getIpAddress();
-        meuIP = meuIP.substring(0,meuIP.lastIndexOf('.'))+".";
-        descoberta_incrementador=0;
-        descoberta_ips_descobertos=new ArrayList<>();
-        ArrayList<Thread> threads=new ArrayList<>();
+        try{
+            meuIP = TelaCrianca.getIpAddress();
+            meuIP = meuIP.substring(0,meuIP.lastIndexOf('.'))+".";
+            descoberta_incrementador=0;
+            descoberta_ips_descobertos=new ArrayList<>();
+            ArrayList<Thread> threads=new ArrayList<>();
 
-        for (int i=0; i<=255; i++){
-            final String ip=meuIP+i;
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Socket socket = new Socket();
-                        socket.connect(new InetSocketAddress(ip,6789),3000);
-                        socket.setSoTimeout(3000);
-                        Mensagem msg = new Mensagem("busca");
-                        Mensagem.escrever(msg,socket);
-                        Mensagem nova=Mensagem.ler(socket);
-                        Dispositivo dp = new Dispositivo();
-                        dp.ip=ip;
-                        dp.nome=(String)nova.parametros.get("nome");
-                        synchronized (descoberta_ips_descobertos){
+            for (int i=0; i<=255; i++){
+                final String ip=meuIP+i;
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Socket socket = new Socket();
+                            socket.connect(new InetSocketAddress(ip,6789),3000);
+                            socket.setSoTimeout(3000);
+                            Mensagem msg = new Mensagem("busca");
+                            Mensagem.escrever(msg,socket);
+                            Mensagem nova=Mensagem.ler(socket);
+                            Dispositivo dp = new Dispositivo();
+                            dp.ip=ip;
+                            dp.nome=(String)nova.parametros.get("nome");
+                            synchronized (descoberta_ips_descobertos){
 
-                            descoberta_ips_descobertos.add(dp);
+                                descoberta_ips_descobertos.add(dp);
+                            }
+                            socket.close();
+                        } catch (IOException e) {
+                            // e.printStackTrace();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        socket.close();
-                    } catch (IOException e) {
-                        // e.printStackTrace();
-                    } catch (Exception e) {
+                        synchronized (descoberta_incrementador){
+                            descoberta_incrementador+=1;
+                        }
+                        Thread.currentThread().interrupt();
+                    }
+                };
+                Thread t = new Thread(r);
+                threads.add(t);
+                t.start();
+            }
+            while (true){
+                boolean terminou=false;
+                synchronized (descoberta_incrementador){
+                    terminou=descoberta_incrementador==256 || threads.size()==0;
+                }
+                if (!terminou){
+                    try {
+                        String saida="";
+                        for (int i=0; i<threads.size(); i++){
+
+
+                            if (!threads.get(i).isAlive()){
+                                threads.remove(i);
+
+                            } else{
+                                saida+=threads.get(i).getId()+" ";
+                            }
+                        }
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    synchronized (descoberta_incrementador){
-                        descoberta_incrementador+=1;
-                    }
-                    Thread.currentThread().interrupt();
-                }
-            };
-            Thread t = new Thread(r);
-            threads.add(t);
-            t.start();
-        }
-        while (true){
-            boolean terminou=false;
-            synchronized (descoberta_incrementador){
-                terminou=descoberta_incrementador==256;
-            }
-            if (!terminou){
-                try {
-                    String saida="";
-                    for (int i=0; i<threads.size(); i++){
-                        if (!threads.get(i).isAlive()){
-                            threads.remove(i);
 
-                        } else{
-                            saida+=threads.get(i).getId()+" ";
-                        }
-                    }
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
-
+                else{
+                    Log.d("tag-joao","Terminou a busca, achou: "+descoberta_ips_descobertos.size()+" ips");
+                    return descoberta_ips_descobertos;
+                }
             }
-            else{
-                return descoberta_ips_descobertos;
-            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<Dispositivo>();
         }
     }
 }
